@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LMJ – Accountancy Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:    #fdf8f2;
+      --warm:     #f5ede0;
+      --sand:     #e8d9c4;
+      --bark:     #8b6b4a;
+      --bark-dark:#5c4530;
+      --green:    #4a7c59;
+      --green-lt: #edf4f0;
+      --text:     #2e2318;
+      --muted:    #7a6652;
+      --white:    #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--cream);
+      border-bottom: 1px solid var(--sand);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Lora', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--bark-dark);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--green); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--bark-dark); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--warm);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(74,124,89,0.1) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 80% 20%, rgba(139,107,74,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--green-lt);
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 600;
+      color: var(--bark-dark);
+      line-height: 1.2;
+      max-width: 700px;
+      margin: 0 auto 1.2rem;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--green);
+    }
+    .hero p {
+      max-width: 520px;
+      margin: 0 auto 2.2rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+    .btn-primary {
+      background: var(--green);
+      color: var(--white);
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--bark-dark);
+      border: 2px solid var(--sand);
+      margin-left: 0.75rem;
+      animation: fadeUp 0.7s 0.35s ease both;
+    }
+
+    /* ── TRUST BAR ── */
+    .trust {
+      background: var(--white);
+      border-top: 1px solid var(--sand);
+      border-bottom: 1px solid var(--sand);
+      padding: 1.4rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.88rem; color: var(--muted); font-weight: 500;
+    }
+    .trust-item svg { color: var(--green); flex-shrink: 0; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1000px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      font-weight: 600;
+      color: var(--bark-dark);
+      line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--white); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--cream);
+      border: 1px solid var(--sand);
+      border-radius: 16px;
+      padding: 2rem 1.6rem;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(92,69,48,0.1);
+      border-color: var(--bark);
+    }
+    .service-icon {
+      width: 48px; height: 48px;
+      background: var(--green-lt);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.1rem;
+      font-size: 1.4rem;
+    }
+    .service-card h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--bark-dark);
+      margin-bottom: 0.5rem;
+    }
+    .service-card p { font-size: 0.88rem; color: var(--muted); }
+
+    /* ── WHY ── */
+    #why { background: var(--warm); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .why-points { list-style: none; display: flex; flex-direction: column; gap: 1.4rem; }
+    .why-point {
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .why-dot {
+      width: 10px; height: 10px;
+      background: var(--green);
+      border-radius: 50%;
+      margin-top: 0.55rem;
+      flex-shrink: 0;
+    }
+    .why-point strong { display: block; color: var(--bark-dark); font-weight: 500; margin-bottom: 0.2rem; }
+    .why-point span { font-size: 0.9rem; color: var(--muted); }
+    .why-aside {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2.4rem;
+      border: 1px solid var(--sand);
+      text-align: center;
+    }
+    .why-aside .big {
+      font-family: 'Lora', serif;
+      font-size: 3.5rem;
+      font-weight: 600;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .why-aside p { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .why-aside blockquote {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--bark-dark);
+      border-left: 3px solid var(--green);
+      padding-left: 1rem;
+      text-align: left;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--white); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-method {
+      display: flex; gap: 1.1rem; align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+    .contact-icon {
+      width: 44px; height: 44px;
+      background: var(--green-lt);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-method h4 { font-weight: 500; color: var(--bark-dark); margin-bottom: 0.2rem; }
+    .contact-method a { color: var(--green); text-decoration: none; font-size: 1rem; font-weight: 500; }
+    .contact-method a:hover { text-decoration: underline; }
+    .contact-method p { font-size: 0.88rem; color: var(--muted); }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .contact-form label { font-size: 0.85rem; font-weight: 500; color: var(--muted); display: block; margin-bottom: 0.3rem; }
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--sand);
+      border-radius: 10px;
+      background: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .contact-form select:focus { border-color: var(--green); }
+    .contact-form textarea { resize: vertical; min-height: 110px; }
+    .btn-submit {
+      align-self: flex-start;
+      padding: 0.85rem 2rem;
+      background: var(--green);
+      color: var(--white);
+      border: none;
+      border-radius: 999px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(74,124,89,0.3); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bark-dark);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+    }
+    footer strong { color: var(--white); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .why-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .trust { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>LMJ</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why LMJ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="btn btn-primary" href="#contact" style="animation:none;padding:0.55rem 1.4rem;font-size:0.88rem;">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Friendly, professional accountancy</div>
+  <h1>Numbers sorted.<br><em>Stress gone.</em></h1>
+  <p>From payroll to forensic accounting, LMJ makes finance straightforward — with a smile and no jargon.</p>
+  <a class="btn btn-primary" href="#contact">Book a free chat</a>
+  <a class="btn btn-outline" href="#services">Our services</a>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust">
+  <div class="trust-item">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+    Qualified & Chartered
+  </div>
+  <div class="trust-item">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    Small & large businesses
+  </div>
+  <div class="trust-item">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+    Flexible appointments
+  </div>
+  <div class="trust-item">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Fully confidential
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-label">What we do</div>
+    <h2 class="section-title">Services built around you</h2>
+    <p class="section-sub">Whether you're a sole trader or a growing company, LMJ handles the numbers so you can focus on what you do best.</p>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">💼</div>
+        <h3>Payroll</h3>
+        <p>Accurate, on-time payroll processing for teams of any size. We handle PAYE, RTI submissions, pension auto-enrolment, and payslips.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3>Management Accounts</h3>
+        <p>Clear monthly or quarterly reports that give you a real picture of your business performance — without the accountant-speak.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🕵️</div>
+        <h3>Forensic Accounting</h3>
+        <p>Investigating financial discrepancies, fraud, or disputes? LMJ provides thorough, impartial analysis and expert reporting.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div>
+        <div class="section-label">Why LMJ?</div>
+        <h2 class="section-title">Accountancy with a human touch</h2>
+        <ul class="why-points">
+          <li class="why-point">
+            <div class="why-dot"></div>
+            <div><strong>Plain English, always</strong><span>No confusing jargon — just clear, honest advice you can actually act on.</span></div>
+          </li>
+          <li class="why-point">
+            <div class="why-dot"></div>
+            <div><strong>Responsive & reliable</strong><span>You'll always hear back quickly. LMJ treats your deadlines like his own.</span></div>
+          </li>
+          <li class="why-point">
+            <div class="why-dot"></div>
+            <div><strong>Tailored to your business</strong><span>No one-size-fits-all packages. Services are shaped around what you actually need.</span></div>
+          </li>
+          <li class="why-point">
+            <div class="why-dot"></div>
+            <div><strong>Transparent pricing</strong><span>Know exactly what you're paying before any work begins. No nasty surprises.</span></div>
+          </li>
+        </ul>
+      </div>
+      <div class="why-aside">
+        <div class="big">10+</div>
+        <p>Years helping businesses grow with confidence</p>
+        <blockquote>"Barry from LMJ turned what I dreaded into something I actually understand. Brilliant service."</blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Get in touch</div>
+    <h2 class="section-title">Let's have a chat</h2>
+    <p class="section-sub">No obligation, no pressure. Get in touch and LMJ will get back to you within one working day.</p>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-method">
+          <div class="contact-icon">
+            <svg width="20" height="20" fill="none" stroke="#4a7c59" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 5.93 5.93l1.62-1.62a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <h4>Call LMJ directly</h4>
+            <a href="tel:+353876657896">+353 87 6657896</a>
+            <p>Mon–Fri, 9am – 5:30pm</p>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div class="contact-icon">
+            <svg width="20" height="20" fill="none" stroke="#4a7c59" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <h4>Send an email</h4>
+            <a href="mailto:barry@lmj.ie">barry@lmj.ie</a>
+            <p>We'll reply within one working day</p>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div class="contact-icon">
+            <svg width="20" height="20" fill="none" stroke="#4a7c59" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <h4>Visit us</h4>
+            <p style="color:var(--bark-dark);">123 High Street, Your Town, AB1 2CD</p>
+            <p>By appointment preferred</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="contact-form">
+          <div class="form-row">
+            <div>
+              <label for="fname">First name</label>
+              <input type="text" id="fname" placeholder="Jane" />
+            </div>
+            <div>
+              <label for="lname">Last name</label>
+              <input type="text" id="lname" placeholder="Smith" />
+            </div>
+          </div>
+          <div>
+            <label for="email">Email address</label>
+            <input type="email" id="email" placeholder="jane@example.com" />
+          </div>
+          <div>
+            <label for="phone">Phone (optional)</label>
+            <input type="tel" id="phone" placeholder="+353 87 6657896" />
+          </div>
+          <div>
+            <label for="service">Service interested in</label>
+            <select id="service">
+              <option value="">Select a service…</option>
+              <option>Payroll</option>
+              <option>Management Accounts</option>
+              <option>Forensic Accounting</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Tell LMJ a bit about what you need…"></textarea>
+          </div>
+          <button class="btn-submit" onclick="handleSubmit(event)">Send message →</button>
+          <p id="form-msg" style="display:none;color:var(--green);font-size:0.9rem;"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 <strong>LMJ</strong> · All rights reserved · <a href="mailto:barry@lmj.ie" style="color:rgba(255,255,255,0.6);">barry@lmj.ie</a></p>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const fname = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const msg   = document.getElementById('form-msg');
+    if (!fname || !email) {
+      msg.style.color = '#c0392b';
+      msg.textContent = 'Please fill in your name and email address.';
+      msg.style.display = 'block';
+      return;
+    }
+    msg.style.color = 'var(--green)';
+    msg.textContent = `Thanks ${fname}! Someone from LMJ will be in touch soon.`;
+    msg.style.display = 'block';
+  }
+</script>
+</body>
+</html>
