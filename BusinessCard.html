@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LMJ Print-Ready Business Card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* Printing Setup Specs for Standard Business Card Size (85mm x 55mm / 3.35" x 2.16") */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --cream:    #fdf8f2;
+      --warm:     #f5ede0;
+      --sand:     #e8d9c4;
+      --bark:     #8b6b4a;
+      --bark-dark:#5c4530;
+      --green:    #4a7c59;
+      --green-lt: #edf4f0;
+      --text:     #2e2318;
+      --muted:    #7a6652;
+      --white:    #ffffff;
+    }
+
+    body {
+      background: #f0f0f0;
+      font-family: 'DM Sans', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      padding: 50px;
+    }
+
+    /* Standard Card Container (scaled nicely for web preview, prints perfectly) */
+    .card {
+      width: 1050px; /* Standard 3.5:2 ratio for crisp layout */
+      height: 600px;
+      background: var(--cream);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px;
+      border: 1px solid rgba(0,0,0,0.05);
+      page-break-after: always; /* Forces front and back onto separate sheets when saving to PDF */
+    }
+
+    /* --- SIDE 1: FRONT STYLE --- */
+    .front-layout {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .front-logo {
+      font-family: 'Lora', serif;
+      font-size: 3.5rem;
+      font-weight: 600;
+      color: var(--green);
+      margin-bottom: 40px;
+      letter-spacing: 0.05em;
+    }
+
+    .front-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--bark-dark);
+      letter-spacing: 0.02em;
+      margin-bottom: 5px;
+    }
+
+    .front-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--bark);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 50px;
+    }
+
+    .front-slogan {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--muted);
+    }
+
+    /* --- SIDE 2: BACK STYLE --- */
+    .back-layout {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .back-left {
+      width: 55%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .services-section h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--bark-dark);
+      margin-bottom: 15px;
+    }
+
+    .services-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .services-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
+
+    .services-list li::before {
+      content: "•";
+      color: var(--green);
+      font-size: 1.5rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .contact-info a {
+      text-decoration: none;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--bark-dark);
+      transition: color 0.2s;
+    }
+
+    /* Vertical Divider */
+    .divider {
+      width: 2px;
+      height: 80%;
+      background: var(--sand);
+    }
+
+    /* Back Right (QR Code Side) */
+    .back-right {
+      width: 35%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .qr-container {
+      background: var(--white);
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      border: 1px solid var(--sand);
+      margin-bottom: 20px;
+    }
+
+    .qr-image {
+      width: 180px;
+      height: 180px;
+      display: block;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+
+    .qr-caption {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    .website-link {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--green);
+      text-decoration: none;
+    }
+
+    .location-text {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    /* Print styles optimized for paper */
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+        gap: 0;
+      }
+      .card {
+        box-shadow: none;
+        border: none;
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FRONT OF CARD -->
+  <div class="card front-layout">
+    <div></div> <!-- Spacer -->
+    <div>
+      <div class="front-logo">LMJ</div>
+      <div class="front-name">Barry</div>
+      <div class="front-title">Founder & Principal</div>
+    </div>
+    <div class="front-slogan">Friendly, professional accountancy</div>
+  </div>
+
+  <!-- BACK OF CARD -->
+  <div class="card back-layout">
+    <!-- Left Column: What We Do & Quick Contacts -->
+    <div class="back-left">
+      <div class="services-section">
+        <h3>What We Do</h3>
+        <ul class="services-list">
+          <li>Payroll</li>
+          <li>Management Accounts</li>
+          <li>Forensic Accounting</li>
+        </ul>
+      </div>
+      <div class="contact-info">
+        <a href="mailto:barry@lmj.ie">barry@lmj.ie</a>
+        <a href="tel:+353876657896">+353 87 6657896</a>
+      </div>
+    </div>
+
+    <!-- Center Divider Line -->
+    <div class="divider"></div>
+
+    <!-- Right Column: Interactive Scan Zone -->
+    <div class="back-right">
+      <div class="qr-container">
+        <!-- Renders your local high-definition QR code -->
+        <img class="qr-image" src="qr-code-hd.png" alt="LMJ Contact QR Code">
+      </div>
+      <div>
+        <p class="qr-caption">Scan to save contact</p>
+        <a class="website-link" href="https://lmj.ie">lmj.ie</a>
+        <p class="location-text">Maynooth, Co. Kildare</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
